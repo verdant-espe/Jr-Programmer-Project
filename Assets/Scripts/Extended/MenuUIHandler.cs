@@ -9,29 +9,33 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
+    // References the color picker
     public ColorPicker ColorPicker;
     
     private void Start()
     {
+        // Initializes event numbers for the color picker
         ColorPicker.Init();
+        // Changes game object colors to the new color selected
         ColorPicker.onColorChanged += NewColorSelected;
         
-        //when the menu load we set the color picker to the right color
+        // When the menu loads, set the color picker to the right color
         ColorPicker.SelectColor(MainManager.Instance.TeamColor);
     }
 
     public void StartNew()
     {
+        // Loads in Main scene
         SceneManager.LoadScene(1);
     }
     
     public void Exit()
     {
-        //save the team color before exiting
+        // Save the color before exiting
         MainManager.Instance.SaveColor();
         
 #if UNITY_EDITOR
-        //Don't forget since this use editor code, need to add "using UnityEditor" at the top and wrap it between #if
+        // Exits out of play mode
         EditorApplication.ExitPlaymode();
 #else
         Application.Quit();
@@ -40,17 +44,21 @@ public class MenuUIHandler : MonoBehaviour
 
     public void NewColorSelected(Color color)
     {
+        // Handles the color selected for Main scene
         MainManager.Instance.TeamColor = color;
     }
 
     public void SaveColorClicked()
     {
+        // Saves the selected color
         MainManager.Instance.SaveColor();
     }
 
     public void LoadColorCliked()
     {
+        // Loads in the selected color in the scene
         MainManager.Instance.LoadColor();
+        
         ColorPicker.SelectColor(MainManager.Instance.TeamColor);
     }
 }
