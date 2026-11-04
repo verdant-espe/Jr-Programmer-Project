@@ -19,7 +19,7 @@ public class MenuUIHandler : MonoBehaviour
         // Changes game object colors to the new color selected
         ColorPicker.onColorChanged += NewColorSelected;
         
-        // When the menu loads, set the color picker to the right color
+        // Pre-selects the saved color in the MainManager when menu is launched.
         ColorPicker.SelectColor(MainManager.Instance.TeamColor);
     }
 
@@ -31,7 +31,7 @@ public class MenuUIHandler : MonoBehaviour
     
     public void Exit()
     {
-        // Save the color before exiting
+        // Saves the last selected color when application exits
         MainManager.Instance.SaveColor();
         
 #if UNITY_EDITOR
@@ -44,7 +44,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void NewColorSelected(Color color)
     {
-        // Handles the color selected for Main scene
+        // Called when the user picks a new color
         MainManager.Instance.TeamColor = color;
     }
 
@@ -54,11 +54,12 @@ public class MenuUIHandler : MonoBehaviour
         MainManager.Instance.SaveColor();
     }
 
-    public void LoadColorCliked()
+    public void LoadColorClicked()
     {
         // Loads in the selected color in the scene
         MainManager.Instance.LoadColor();
         
+        // Creates an instance of that color
         ColorPicker.SelectColor(MainManager.Instance.TeamColor);
     }
 }

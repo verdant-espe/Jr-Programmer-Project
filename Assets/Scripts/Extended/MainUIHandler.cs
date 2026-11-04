@@ -29,6 +29,7 @@ public class MainUIHandler : MonoBehaviour
 
     private void Awake()
     {
+        // Current instance of MainManager
         Instance = this;
         // Disables InfoPopup on awake
         InfoPopup.gameObject.SetActive(false);

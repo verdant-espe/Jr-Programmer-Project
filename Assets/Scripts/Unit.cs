@@ -11,7 +11,9 @@ using UnityEngine.AI;
 public abstract class Unit : MonoBehaviour,
     MainUIHandler.IUIInfoContent
 {
+    // Sets speed for unit to 3
     public float Speed = 3;
+
 
     protected NavMeshAgent m_Agent;
     protected Building m_Target;
@@ -26,6 +28,7 @@ public abstract class Unit : MonoBehaviour,
 
     private void Start()
     {
+        // If MainManager Insance is not equal to null, set color for unit
         if (MainManager.Instance != null)
         {
             SetColor(MainManager.Instance.TeamColor);
